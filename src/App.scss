@@ -1,20 +1,25 @@
 .App {
   // text-align: center;
 }
-.NavHeader{
-  background: #FFFFFF;
+.logo {
+  max-width: 100px;
+  background: black;
+  vertical-align: middle;
+}
+.NavHeader {
+  background: #ffffff;
   color: #2c3e50;
   padding: 1rem;
-  border-left: .5rem solid #2c3e50;
-  border-right: .5rem solid #2c3e50;
-  a{
+  border-left: 0.5rem solid #2c3e50;
+  border-right: 0.5rem solid #2c3e50;
+  a {
     color: #2c3e50;
     padding: 2rem;
     font-size: 1.6rem;
     margin-left: 1rem;
     &:link,
-    :visited{
-      color: #2c3e50; 
+    :visited {
+      color: #2c3e50;
       text-decoration: none;
     }
   }
@@ -23,7 +28,4 @@
     text-decoration-style: wavy;
     text-decoration-color: #2c3e50;
   }
-
 }
-
-

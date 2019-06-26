@@ -7,6 +7,7 @@ import {
   NavLink,
   Redirect
 } from "react-router-dom";
+import logo from './assets/bookr_logo.png'
 import Home from "./containers/Bookr/Bookr";
 import Login from "./containers/Login/Login";
 import BookDetail from "./containers/BookrDetail/BookrDetail";
@@ -29,6 +30,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <header className="NavHeader">
+            <img className='logo' src={logo} alt=""/>
             <NavLink to="/" exact>
               Home
             </NavLink>
