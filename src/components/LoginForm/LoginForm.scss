@@ -50,4 +50,17 @@
       }
     }
   }
+  span {
+    text-decoration: none;
+      color: white;
+      font-size: 1.6rem;
+    a{
+      color: white;
+      font-size: 1.6rem;
+      &:link{
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
 }

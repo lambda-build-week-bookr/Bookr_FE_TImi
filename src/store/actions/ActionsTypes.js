@@ -5,4 +5,6 @@ export const ADDBOOK = 'ADDBOOK'
 export const DELETEBOOK = 'DELETEBOOK'
 export const ADDREVIEW = 'ADDREVIEW'
 export const DELETEREVIEW = 'DELETEREVIEW'
+export const FAILURE = "FAILURE";
+export const SUCCESS = 'SUCCESS'
 
