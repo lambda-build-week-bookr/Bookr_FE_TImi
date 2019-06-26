@@ -11,7 +11,7 @@ export const LoginAction = (payload, history) => dispatch => {
       dispatch(logIn(true));
       setTimeout(() => {
         history.push("/");
-      }, 5000);
+      }, 3000);
     })
     .catch(err => {
       dispatch(failure(err.message));
@@ -26,7 +26,23 @@ export const SignUpAction = (payload, history) => dispatch => {
       dispatch(logIn(true));
       setTimeout(() => {
         history.push("/");
-      }, 5000);
+      }, 3000);
+    })
+    .catch(err => {
+      dispatch(failure(err.message));
+    });
+};
+export const getAllBooksAction = () => dispatch => {
+  axios
+    .get("https://api-bookr.herokuapp.com/api/books", {
+      'headers': {
+        'Authorization': localStorage.getItem("token")
+      }
+    })
+    .then(res => {
+      console.log(res.data)
+      // dispatch({type: actionTypes.GETALLBOOKS, payload: res.data});
+      dispatch(logIn(true));
     })
     .catch(err => {
       dispatch(failure(err.message));

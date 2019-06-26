@@ -3,7 +3,8 @@ import * as actionTypes from "../actions/ActionsTypes";
 const initialState = {
   login: false,
   success: null,
-  failure: null
+  failure: null,
+  books: null
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -14,6 +15,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, success: payload };
     case actionTypes.FAILURE:
       return { ...state, failure: payload };
+      case actionTypes.GETALLBOOKS:
+      return { ...state, books: payload };
 
     default:
       return state;

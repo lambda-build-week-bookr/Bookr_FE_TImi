@@ -5,14 +5,12 @@ import { Books as Data } from "../../dummyData";
 import BookPoster from "../../components/BookPoster/BookPoster";
 import Footer from '../../components/Footer/Footer'
 import Banner from '../../components/Banner/Banner'
+import { connect } from "react-redux";
+import { getAllBooksAction } from "../../store/actions/Actions";
 class Bookr extends Component {
-  state = {
-    rateValue: 0
-  };
-  myRef = React.createRef();
+
   componentDidMount() {
-    const rateValue = localStorage.getItem("rated") || 0;
-    this.setState({ rateValue });
+    this.props.getAllBooksAction()
   }
 
   render() {
@@ -34,4 +32,14 @@ class Bookr extends Component {
   }
 }
 
-export default Bookr;
+
+const mapStateToProps = state => {
+  return {
+    failure: state.failure,
+    success: state.success
+  };
+};
+export default connect(
+  mapStateToProps,
+  { getAllBooksAction }
+)(Bookr);
