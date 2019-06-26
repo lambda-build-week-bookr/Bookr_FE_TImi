@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Home from "./containers/Bookr/Bookr";
 import Login from "./containers/Login/Login";
+import BookDetail from "./containers/BookrDetail/BookrDetail";
 
 class App extends Component {
   render() {
@@ -16,7 +17,8 @@ class App extends Component {
       <Route
         {...rest}
         render={props =>
-          localStorage.getItem("token") !== null ? (
+          // localStorage.getItem("token") !== null 
+          true ? (
             <Component {...props} />
           ) : (
             <Redirect to="/login" />
@@ -32,11 +34,13 @@ class App extends Component {
               Home
             </NavLink>
             <NavLink to="/login">Login</NavLink>
+            <NavLink to="/books/1">Bookr</NavLink>
           </header>
           <Switch>
             <PrivateRoute component={Home} path="/" exact />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Login} />
+            <Route path="/books/:id" exact component={BookDetail} />
             <Redirect from="*" to="/login" />
           </Switch>
           <Route />

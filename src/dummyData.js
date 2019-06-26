@@ -5,6 +5,7 @@ export const Books = [
     Edition: "2nd Edition",
     Author: "Lauren Holmes",
     Stars: 2.3,
+    No_Of_Reviews: 24,
     image:
       "https://media-assets.bookbub.com/wp-content/uploads/2016/01/81oKn3X59mL.jpg",
     Reviewers: [

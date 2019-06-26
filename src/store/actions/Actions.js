@@ -7,10 +7,11 @@ export const LoginAction = (payload, history) => dispatch =>{
     .then(res => {
         console.log(res.data)
     //   localStorage.setItem("token", res.data);
-      dispatch(logIn(true));
-    //   history.push('/')
+        dispatch(logIn(true));
+        history.push('/')
     })
     .catch(err => {
+      history.push('/')
       dispatch(failure(err.message));
     });
 }
