@@ -3,7 +3,7 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 import SignUp from "../../components/LoginForm/SignUp";
 import "./Login.scss";
 import { connect } from "react-redux";
-import { LoginAction } from "../../store/actions/Actions";
+import { LoginAction, SignUpAction } from "../../store/actions/Actions";
 import ErrorMessage from '../../components/Message/ErrorMessage'
 
 class login extends Component {
@@ -23,7 +23,7 @@ class login extends Component {
       username: e.currentTarget[0].value
     };
     console.log(data)
-    //this.props.SignUpAction(data, this.props.history);
+    this.props.SignUpAction(data, this.props.history);
   };
   render() {  
     return (
@@ -47,5 +47,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { LoginAction }
+  { LoginAction, SignUpAction }
 )(login);

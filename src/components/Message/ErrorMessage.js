@@ -8,7 +8,6 @@ const errorMessage = (props) => {
     ) : (
       <p style={{color: '#e74c3c'}}>{props.failure}</p>
     );
-  console.log(props.failure);
   return <div className='Error_Success'>{message}</div>;
 };
 

@@ -17,8 +17,7 @@ class App extends Component {
       <Route
         {...rest}
         render={props =>
-          // localStorage.getItem("token") !== null 
-          true ? (
+          localStorage.getItem("token") !== null ? (
             <Component {...props} />
           ) : (
             <Redirect to="/login" />

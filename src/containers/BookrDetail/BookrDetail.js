@@ -1,7 +1,30 @@
 import React, { Component } from "react";
 import "./BookrDetail.scss";
+import Star from "../../components/BookPoster/Stars";
 export default class BookrDetail extends Component {
+  handleRating = event => {
+    // const rateValue = Number(event.target.id);
+    // this.setState({ rateValue, rated: true });
+    // localStorage.setItem("rated", rateValue);
+  };
   render() {
+    // const { rateValue } = this.state;
+    // const rateValue = 3;
+    // const rating = Array(5)
+    //   .fill(undefined)
+    //   .map((star, index) => {
+    //     const value = index + 1;
+    //     const filled = value <= rateValue ? "filled" : "";
+    //     return (
+    //       <i
+    //         className={`far fa-star star ${filled}`}
+    //         onClick={this.handleRating}
+    //         id={value}
+    //         key={value}
+    //       />
+    //     );
+    //   })
+    //   .reverse();
     return (
       <div className="BookrDetail">
         <div className="BookrDetail_Banner">
@@ -17,9 +40,10 @@ export default class BookrDetail extends Component {
           <div>
             <h2>False Step </h2>
             <p>by Victoria Helen</p>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
+            <br />
             <p>
               For days, all of Denver, Colorado, has worried over the fate of a
               missing child, little Tanner Holcomb. Then, a miracle: handsome,
@@ -37,13 +61,39 @@ export default class BookrDetail extends Component {
             </p>
           </div>
           <div>
-          <p> Editor Published: <small> Lorem ipsum dolor sit amet.</small></p>
-          <p> ISBN: <small> Lorem ipsum dolor sit amet.</small></p>
-          <p> Editorial Language: <small> Lorem ipsum dolor sit amet.</small></p>
+            <p>
+              {" "}
+              Editor Published: <small> Lorem ipsum dolor sit amet.</small>
+            </p>
+            <p>
+              {" "}
+              ISBN: <small> Lorem ipsum dolor sit amet.</small>
+            </p>
+            <p>
+              {" "}
+              Editorial Language: <small> Lorem ipsum dolor sit amet.</small>
+            </p>
           </div>
         </div>
-        <div className='star_review'> hi</div>
+        <section className="reviews">
+          <h1>Reviews</h1>
+          <div className="total_stars">
+            <hr />
+            <Star star="1" />
+            <span>234 Reviews </span>
+          </div>
+          <div>
+              <form action="">
+                  <textarea name="" id="" cols="30" rows="10"></textarea>
+              </form>
+          </div>
+        </section>
       </div>
     );
   }
 }
+
+// {/* <div className="ratings">
+//           <hr /> <span> Reviews 234</span>
+//           {rating}{" "}
+//         </div> */}
