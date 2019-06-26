@@ -1,0 +1,12 @@
+.Footer{
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem 0;
+    &>div:nth-of-type(1){
+        i{
+            padding: 1rem;
+            font-size: 1.6rem;
+            color: rgba(0, 0, 0, 0.541);
+        }
+    }
+}

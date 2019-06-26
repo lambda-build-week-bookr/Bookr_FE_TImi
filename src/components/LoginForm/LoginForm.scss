@@ -1,0 +1,53 @@
+.LoginForm_Container {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding-top: 15%;
+  h2 {
+    color: white;
+    font-weight: 300;
+    padding: 1rem;
+  }
+  form {
+    padding: 1rem;
+    font-size: 1.6rem;
+    text-align: center;
+    input {
+      outline: none;
+      border: 0.1rem solid rgba(0, 0, 0, 0.5);
+      padding: 1.5rem;
+      padding-left: 4rem;
+      font-size: 1.6rem;
+      width: 100%;
+      line-height: 2rem;
+      height: 5.2rem;
+      margin-bottom: 2rem;
+      border-radius: 0.3rem;
+      background: white;
+      background-repeat: no-repeat;
+      background-position: 4px 10px;
+      background-size: 30px;
+      &[type="text"] {
+        background-image: url(../../assets/user.svg);
+      }
+      &[type="email"] {
+        background-image: url(../../assets/mail.svg);
+      }
+      &[type="password"] {
+        background-image: url(../../assets/password.svg);
+      }
+    }
+    button {
+      width: 50%;
+      height: 5rem;
+      font-size: 1.6rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      border: none;
+      outline: none;
+      &:hover {
+        color: white;
+        background: black;
+      }
+    }
+  }
+}
