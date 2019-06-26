@@ -4,6 +4,7 @@ import SignUp from "../../components/LoginForm/SignUp";
 import "./Login.scss";
 import { connect } from "react-redux";
 import { LoginAction } from "../../store/actions/Actions";
+import ErrorMessage from '../../components/Message/ErrorMessage'
 
 class login extends Component {
   LoginHandler = e => {
@@ -24,17 +25,10 @@ class login extends Component {
     console.log(data)
     //this.props.SignUpAction(data, this.props.history);
   };
-  render() {
-    const message =
-      this.props.success === null ? (
-        <p>{this.props.success}</p>
-      ) : (
-        <p>{this.props.failure}</p>
-      );
-      console.log(this.props.success)
+  render() {  
     return (
       <div className="Login_section">
-        {message}
+        <ErrorMessage/>
         {this.props.history.location.pathname === "/login" ? (
           <LoginForm Login={this.LoginHandler} />
         ) : (
@@ -44,8 +38,6 @@ class login extends Component {
     );
   }
 }
-
-// export default login;
 
 const mapStateToProps = state => {
   return {
