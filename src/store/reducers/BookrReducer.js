@@ -4,7 +4,7 @@ const initialState = {
   login: false,
   success: null,
   failure: null,
-  books: null
+  books: []
 };
 
 export default (state = initialState, { type, payload }) => {

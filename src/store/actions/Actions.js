@@ -40,9 +40,8 @@ export const getAllBooksAction = () => dispatch => {
       }
     })
     .then(res => {
-      console.log(res.data)
-      // dispatch({type: actionTypes.GETALLBOOKS, payload: res.data});
-      dispatch(logIn(true));
+      dispatch({type: actionTypes.GETALLBOOKS, payload: res.data.books});
+      dispatch(success(res.data.status));
     })
     .catch(err => {
       dispatch(failure(err.message));

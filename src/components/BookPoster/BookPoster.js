@@ -9,12 +9,12 @@ const bookPoster = props => {
         {props.data.map(elem => (
           <div key={elem.id}>
             <div className='book_img'>
-              <img src={elem.image} alt='' />
+              <img src={elem.thumbnail} alt='' />
             </div>
             <div className='book_details'>
-              <p>{elem.Author}</p>
-              <p>{elem.Edition}</p>
-              <Star star={elem.Stars}></Star> <span>{elem.No_Of_Reviews}</span>
+              <p>{elem.title}</p>
+              <p>{elem.isbn}</p>
+              <Star star={elem.averageRating}></Star> <span>{elem.totalReviews}</span>
             </div>
           </div>
         ))}

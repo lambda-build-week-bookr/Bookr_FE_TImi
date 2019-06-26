@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "./Bookr.scss";
-import { Books as Data } from "../../dummyData";
 import BookPoster from "../../components/BookPoster/BookPoster";
 import Footer from '../../components/Footer/Footer'
 import Banner from '../../components/Banner/Banner'
@@ -9,7 +8,7 @@ import { connect } from "react-redux";
 import { getAllBooksAction } from "../../store/actions/Actions";
 class Bookr extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.getAllBooksAction()
   }
 
@@ -20,11 +19,11 @@ class Bookr extends Component {
         <Banner/>
         <BookPoster
           title={"My Favorite List"}
-          data={Data}
+          data={this.props.books.slice(0, 5)}
         />
         <BookPoster
-          title={"Suggested Title"}
-          data={Data}
+          title={" Suggested Title"}
+          data={this.props.books.reverse().slice(0, 10)}
         />
         <Footer/>
       </div>
@@ -35,8 +34,7 @@ class Bookr extends Component {
 
 const mapStateToProps = state => {
   return {
-    failure: state.failure,
-    success: state.success
+    books: state.books
   };
 };
 export default connect(
