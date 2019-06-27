@@ -1,9 +1,10 @@
 import React from 'react'
 import './Banner.scss'
+import Banner from '../../assets/landing.jpg'
 const banner = () => {
     return (
         <div className='Banner_Image'>
-            <img src="https://github.com/lambda-build-week-bookr/web-ui-colin-devries/blob/master/images/landing.jpg?raw=true" alt=""/>
+            <img src={Banner} alt=""/>
         </div>
     )
 }
