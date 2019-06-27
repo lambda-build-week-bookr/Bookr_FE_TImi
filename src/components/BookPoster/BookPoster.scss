@@ -1,5 +1,8 @@
 .Section_container{
     margin: 3rem 0;
+    h2{
+      color: #585757;
+    }
 }
 
 .Section_Trending {
@@ -23,7 +26,6 @@
     height: 200px;
     padding: 1rem;
     img {
-      //   max-width: 100%;
       height: 200px;
     }
   }
