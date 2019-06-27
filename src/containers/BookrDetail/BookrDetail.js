@@ -1,30 +1,37 @@
 import React, { Component } from "react";
 import "./BookrDetail.scss";
 import Star from "../../components/BookPoster/Stars";
+import Footer from "../../components/Footer/Footer";
+import Reviews from '../../components/Reviews/Reviews' 
 export default class BookrDetail extends Component {
+  state = {
+    rateValue: 0,
+    rated: false
+  };
   handleRating = event => {
-    // const rateValue = Number(event.target.id);
-    // this.setState({ rateValue, rated: true });
-    // localStorage.setItem("rated", rateValue);
+    const rateValue = Number(event.target.id);
+    this.setState({ rateValue, rated: true });
+    localStorage.setItem("rated", rateValue);
   };
   render() {
-    // const { rateValue } = this.state;
-    // const rateValue = 3;
-    // const rating = Array(5)
-    //   .fill(undefined)
-    //   .map((star, index) => {
-    //     const value = index + 1;
-    //     const filled = value <= rateValue ? "filled" : "";
-    //     return (
-    //       <i
-    //         className={`far fa-star star ${filled}`}
-    //         onClick={this.handleRating}
-    //         id={value}
-    //         key={value}
-    //       />
-    //     );
-    //   })
-    //   .reverse();
+    const { rateValue } = this.state;
+    // const rateValue = 1;
+    const rating = Array(5)
+      .fill(undefined)
+      .map((star, index) => {
+        const value = index + 1;
+        const filled = value <= rateValue ? "filled" : "";
+        console.log(value, rateValue);
+        return (
+          <i
+            className={`far fa-star star ${filled}`}
+            onClick={this.handleRating}
+            id={value}
+            key={value}
+          />
+        );
+      })
+      .reverse();
     return (
       <div className="BookrDetail">
         <div className="BookrDetail_Banner">
@@ -62,15 +69,12 @@ export default class BookrDetail extends Component {
           </div>
           <div>
             <p>
-              {" "}
               Editor Published: <small> Lorem ipsum dolor sit amet.</small>
             </p>
             <p>
-              {" "}
               ISBN: <small> Lorem ipsum dolor sit amet.</small>
             </p>
             <p>
-              {" "}
               Editorial Language: <small> Lorem ipsum dolor sit amet.</small>
             </p>
           </div>
@@ -79,15 +83,32 @@ export default class BookrDetail extends Component {
           <h1>Reviews</h1>
           <div className="total_stars">
             <hr />
-            <Star star="1" />
+            <Star star="1.5" />
             <span>234 Reviews </span>
+            <hr />
           </div>
-          <div>
-              <form action="">
-                  <textarea name="" id="" cols="30" rows="10"></textarea>
-              </form>
+          <div className="review_Form">
+            <form action="">
+              <h2>Add a Review</h2>
+              <p>Give Overall Rating</p>
+              <div className="ratings">{rating}</div>
+              <p>Write a Review</p>
+              <textarea
+                name=""
+                id=""
+                placeholder="Write your detailed review here."
+              />{" "}
+              <br />
+              <button>Submit</button>
+            </form>
+          </div>
+          <hr />
+          <div className="community_reviews_container">
+            <h2>COMMUNITY REVIEWS</h2>
+            <Reviews/>
           </div>
         </section>
+        <Footer />
       </div>
     );
   }

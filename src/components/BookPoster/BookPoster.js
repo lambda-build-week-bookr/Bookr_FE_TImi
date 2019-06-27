@@ -4,7 +4,7 @@ import Star from './Stars'
 const bookPoster = props => {
   return (
     <div className='Section_container'>
-      <h4>{props.title}</h4>
+      <h2>{props.title}</h2>
       <div className='Section_Trending'>
         {props.data.map(elem => (
           <div key={elem.id}>
