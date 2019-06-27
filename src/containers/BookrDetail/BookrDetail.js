@@ -58,8 +58,8 @@ class BookrDetail extends Component {
             <img src={this.props.book.cover} alt="" />
           </div>
           <div>
-            <h1>False Step </h1>
-            <h4>by {this.props.book.authors}</h4>
+            <h1>{this.props.book.title}</h1>
+            <h4>by {this.props.book.authors ? this.props.book.authors[0].name : ''}</h4>
             <p>
               {String(this.props.book.description).substring(0, 655) + "..."}
             </p>

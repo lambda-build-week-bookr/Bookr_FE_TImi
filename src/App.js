@@ -33,7 +33,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <header className="NavHeader">
-            <img className="logo" src={logo} alt="" />
+          <Link to="/"> <img className="logo" src={logo} alt="" /> </Link>
             <div>
               <NavLink to="/" exact>
                 Home

@@ -73,7 +73,6 @@ export const addReviewAction = (data, id) => dispatch => {
       }
     })
     .then(res => {
-      console.log(res.data);
       dispatch({type: actionTypes.ADDREVIEW, payload: res.data.review});
       dispatch(success(res.data.status));
     })
