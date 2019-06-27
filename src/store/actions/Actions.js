@@ -55,9 +55,24 @@ export const getOneBooksAction = (id) => dispatch => {
       }
     })
     .then(res => {
-      console.log(res.data)
       dispatch({type: actionTypes.GETONEBOOK, payload: res.data.book});
       dispatch(success(res.data.status));
+    })
+    .catch(err => {
+      dispatch(failure(err.message));
+    });
+};
+export const addReviewAction = (data, id) => dispatch => {
+  axios
+    .post("https://api-bookr.herokuapp.com/api/reviews/"+ id, data, {
+      'headers': {
+        'Authorization': localStorage.getItem("token")
+      }
+    })
+    .then(res => {
+      console.log(res.data)
+      // dispatch({type: actionTypes.GETONEBOOK, payload: res.data.book});
+      // dispatch(success(res.data.status));
     })
     .catch(err => {
       dispatch(failure(err.message));

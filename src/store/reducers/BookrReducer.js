@@ -20,6 +20,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, books: payload };
     case actionTypes.GETONEBOOK:
       return { ...state, book: payload };
+    case actionTypes.ADDREVIEW:
+      return { ...state, book: payload };
 
     default:
       return state;

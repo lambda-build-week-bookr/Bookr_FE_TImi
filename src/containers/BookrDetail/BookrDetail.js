@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import "./BookrDetail.scss";
 import Star from "../../components/BookPoster/Stars";
 import Footer from "../../components/Footer/Footer";
-import Reviews from '../../components/Reviews/Reviews' 
-import {getOneBooksAction} from '../../store/actions/Actions'
+import Reviews from "../../components/Reviews/Reviews";
+import {
+  getOneBooksAction,
+  addReviewAction
+} from "../../store/actions/Actions";
 import { connect } from "react-redux";
 class BookrDetail extends Component {
   state = {
@@ -15,19 +18,26 @@ class BookrDetail extends Component {
     this.setState({ rateValue, rated: true });
     localStorage.setItem("rated", rateValue);
   };
-  componentDidMount(){
-    console.log(this.props.match.params.id)
-    this.props.getOneBooksAction(this.props.match.params.id)
+  componentDidMount() {
+    this.props.getOneBooksAction(this.props.match.params.id);
   }
+  addReviewHandler = e => {
+    e.preventDefault(); 
+    const data={
+      rating: this.state.rateValue,
+      review: e.currentTarget[0].value
+    }
+    this.props.addReviewAction(data,this.props.match.params.id );
+    e.currentTarget.reset();
+    this.setState({rated: false, rateValue: 0})
+  };
   render() {
     const { rateValue } = this.state;
-    // const rateValue = 1;
     const rating = Array(5)
       .fill(undefined)
       .map((star, index) => {
         const value = index + 1;
         const filled = value <= rateValue ? "filled" : "";
-        console.log(value, rateValue);
         return (
           <i
             className={`far fa-star star ${filled}`}
@@ -45,21 +55,18 @@ class BookrDetail extends Component {
         </div>
         <div className="BookrDetail_Section_1">
           <div>
-            <img
-              src={this.props.book.cover}
-              alt=""
-            />
+            <img src={this.props.book.cover} alt="" />
           </div>
           <div>
             <h1>False Step </h1>
             <h4>by {this.props.book.authors}</h4>
             <p>
-              {String(this.props.book.description).substring(0,655)+'...'}
+              {String(this.props.book.description).substring(0, 655) + "..."}
             </p>
           </div>
           <div>
             <p>
-              Editor Published: <small>{this.props.book.publisher}</small> 
+              Editor Published: <small>{this.props.book.publisher}</small>
             </p>
             <p>
               ISBN: <small>{this.props.book.isbn}</small>
@@ -78,7 +85,7 @@ class BookrDetail extends Component {
             <hr />
           </div>
           <div className="review_Form">
-            <form action="">
+            <form action="" onSubmit={this.addReviewHandler}>
               <h2>Add a Review</h2>
               <p>Give Overall Rating</p>
               <div className="ratings">{rating}</div>
@@ -95,7 +102,7 @@ class BookrDetail extends Component {
           <hr />
           <div className="community_reviews_container">
             <h2>COMMUNITY REVIEWS</h2>
-            <Reviews data={this.props.book.reviews || []}/>
+            <Reviews data={this.props.book.reviews || []} />
           </div>
         </section>
         <Footer />
@@ -111,18 +118,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { getOneBooksAction }
+  { getOneBooksAction, addReviewAction }
 )(BookrDetail);
-
-
-// authors: ["Reuben Hersh"]
-// averageRating: null
-// cover: "https://books.google.com/books/content?id=R-qgdx2A5b0C&printsec=frontcover&img=1&zoom=3"
-// description: "Reflecting an insider's view of mathematical life, the author argues that mathematics must be historically evolved, and intelligible only in a social context."
-// id: 8
-// isbn: "9780195130874"
-// publisher: "Oxford University Press, USA"
-// reviews: []
-// thumbnail: "https://books.google.com/books/content?id=R-qgdx2A5b0C&printsec=frontcover&img=1&zoom=2"
-// title: "What is Mathematics, Really?"
-// totalReviews: 0
