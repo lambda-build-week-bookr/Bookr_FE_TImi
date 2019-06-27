@@ -41,7 +41,7 @@ class App extends Component {
             <PrivateRoute component={Home} path="/" exact />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Login} />
-            <Route path="/books/:id" exact component={BookDetail} />
+            <PrivateRoute path="/books/:id" exact component={BookDetail} />
             <Redirect from="*" to="/login" />
           </Switch>
           <Route />

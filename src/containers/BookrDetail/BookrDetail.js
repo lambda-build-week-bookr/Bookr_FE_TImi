@@ -3,7 +3,9 @@ import "./BookrDetail.scss";
 import Star from "../../components/BookPoster/Stars";
 import Footer from "../../components/Footer/Footer";
 import Reviews from '../../components/Reviews/Reviews' 
-export default class BookrDetail extends Component {
+import {getOneBooksAction} from '../../store/actions/Actions'
+import { connect } from "react-redux";
+class BookrDetail extends Component {
   state = {
     rateValue: 0,
     rated: false
@@ -13,6 +15,10 @@ export default class BookrDetail extends Component {
     this.setState({ rateValue, rated: true });
     localStorage.setItem("rated", rateValue);
   };
+  componentDidMount(){
+    console.log(this.props.match.params.id)
+    this.props.getOneBooksAction(this.props.match.params.id)
+  }
   render() {
     const { rateValue } = this.state;
     // const rateValue = 1;
@@ -40,39 +46,23 @@ export default class BookrDetail extends Component {
         <div className="BookrDetail_Section_1">
           <div>
             <img
-              src="https://media-assets.bookbub.com/wp-content/uploads/2016/01/81oKn3X59mL.jpg"
+              src={this.props.book.cover}
               alt=""
             />
           </div>
           <div>
-            <h2>False Step </h2>
-            <p>by Victoria Helen</p>
-            <br />
-            <br />
-            <br />
-            <br />
+            <h1>False Step </h1>
+            <h4>by {this.props.book.authors}</h4>
             <p>
-              For days, all of Denver, Colorado, has worried over the fate of a
-              missing child, little Tanner Holcomb. Then, a miracle: handsome,
-              athletic Johnny Bradley finds him, frightened but unharmed, on a
-              hiking trail miles from his wealthy family’s mountain home. In a
-              heartbeat, his rescuer goes from financially strapped fitness
-              trainer to celebrated hero. The heat of the spotlight may prove
-              too much for Johnny’s picture-perfect family, however. His wife,
-              Veronica, despises the pressure of the sudden fame, afraid that
-              secrets and bitter resentments of her marriage may come to light.
-              And she’s willing to do anything to keep them hidden. But when a
-              shocking revelation exposes an even darker side to Tanner’s
-              disappearance, Veronica realizes that nothing in her life can be
-              trusted. And everything should be feared.
+              {String(this.props.book.description).substring(0,655)+'...'}
             </p>
           </div>
           <div>
             <p>
-              Editor Published: <small> Lorem ipsum dolor sit amet.</small>
+              Editor Published: <small>{this.props.book.publisher}</small> 
             </p>
             <p>
-              ISBN: <small> Lorem ipsum dolor sit amet.</small>
+              ISBN: <small>{this.props.book.isbn}</small>
             </p>
             <p>
               Editorial Language: <small> Lorem ipsum dolor sit amet.</small>
@@ -83,8 +73,8 @@ export default class BookrDetail extends Component {
           <h1>Reviews</h1>
           <div className="total_stars">
             <hr />
-            <Star star="1.5" />
-            <span>234 Reviews </span>
+            <Star star={this.props.book.averageRating} />
+            <span>{this.props.book.totalReviews} Reviews </span>
             <hr />
           </div>
           <div className="review_Form">
@@ -105,7 +95,7 @@ export default class BookrDetail extends Component {
           <hr />
           <div className="community_reviews_container">
             <h2>COMMUNITY REVIEWS</h2>
-            <Reviews/>
+            <Reviews data={this.props.book.reviews || []}/>
           </div>
         </section>
         <Footer />
@@ -114,7 +104,25 @@ export default class BookrDetail extends Component {
   }
 }
 
-// {/* <div className="ratings">
-//           <hr /> <span> Reviews 234</span>
-//           {rating}{" "}
-//         </div> */}
+const mapStateToProps = state => {
+  return {
+    book: state.book
+  };
+};
+export default connect(
+  mapStateToProps,
+  { getOneBooksAction }
+)(BookrDetail);
+
+
+// authors: ["Reuben Hersh"]
+// averageRating: null
+// cover: "https://books.google.com/books/content?id=R-qgdx2A5b0C&printsec=frontcover&img=1&zoom=3"
+// description: "Reflecting an insider's view of mathematical life, the author argues that mathematics must be historically evolved, and intelligible only in a social context."
+// id: 8
+// isbn: "9780195130874"
+// publisher: "Oxford University Press, USA"
+// reviews: []
+// thumbnail: "https://books.google.com/books/content?id=R-qgdx2A5b0C&printsec=frontcover&img=1&zoom=2"
+// title: "What is Mathematics, Really?"
+// totalReviews: 0

@@ -47,6 +47,22 @@ export const getAllBooksAction = () => dispatch => {
       dispatch(failure(err.message));
     });
 };
+export const getOneBooksAction = (id) => dispatch => {
+  axios
+    .get("https://api-bookr.herokuapp.com/api/books/"+ id, {
+      'headers': {
+        'Authorization': localStorage.getItem("token")
+      }
+    })
+    .then(res => {
+      console.log(res.data)
+      dispatch({type: actionTypes.GETONEBOOK, payload: res.data.book});
+      dispatch(success(res.data.status));
+    })
+    .catch(err => {
+      dispatch(failure(err.message));
+    });
+};
 
 export const logIn = payload => {
   return {

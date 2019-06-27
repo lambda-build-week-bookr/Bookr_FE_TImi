@@ -4,7 +4,8 @@ const initialState = {
   login: false,
   success: null,
   failure: null,
-  books: []
+  books: [],
+  book: ""
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -15,8 +16,10 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, success: payload };
     case actionTypes.FAILURE:
       return { ...state, failure: payload };
-      case actionTypes.GETALLBOOKS:
+    case actionTypes.GETALLBOOKS:
       return { ...state, books: payload };
+    case actionTypes.GETONEBOOK:
+      return { ...state, book: payload };
 
     default:
       return state;
