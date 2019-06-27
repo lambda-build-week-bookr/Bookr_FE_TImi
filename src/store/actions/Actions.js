@@ -78,6 +78,10 @@ export const addReviewAction = (data, id) => dispatch => {
       dispatch(failure(err.message));
     });
 };
+export const logOutAction = () => dispatch => {
+  localStorage.clear()
+  dispatch(logIn(false));
+};
 
 export const logIn = payload => {
   return {

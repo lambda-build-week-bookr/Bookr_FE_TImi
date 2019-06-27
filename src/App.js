@@ -5,12 +5,15 @@ import {
   Route,
   Switch,
   NavLink,
+  Link,
   Redirect
 } from "react-router-dom";
-import logo from './assets/bookr_logo.png'
+import { connect } from "react-redux";
+import logo from "./assets/bookr_logo.png";
 import Home from "./containers/Bookr/Bookr";
 import Login from "./containers/Login/Login";
 import BookDetail from "./containers/BookrDetail/BookrDetail";
+import { logOutAction } from "./store/actions/Actions";
 
 class App extends Component {
   render() {
@@ -30,12 +33,18 @@ class App extends Component {
       <div className="App">
         <Router>
           <header className="NavHeader">
-            <img className='logo' src={logo} alt=""/>
+            <img className="logo" src={logo} alt="" />
             <NavLink to="/" exact>
               Home
             </NavLink>
             <NavLink to="/login">Login</NavLink>
-            <NavLink to="/books/1">Bookr</NavLink>
+            {this.props.login ? (
+              <Link to="/login" onClick={this.props.logOutAction}>
+                Logout
+              </Link>
+            ) : (
+              ""
+            )}
           </header>
           <Switch>
             <PrivateRoute component={Home} path="/" exact />
@@ -51,4 +60,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    login: state.login
+  };
+};
+export default connect(
+  mapStateToProps,
+  { logOutAction }
+)(App);
