@@ -2,22 +2,24 @@ import axios from "axios";
 import * as actionTypes from "./ActionsTypes";
 
 export const LoginAction = (payload, history) => dispatch => {
+  dispatch({ type: actionTypes.SHOW, payload: false });
   axios
     .post("https://api-bookr.herokuapp.com/api/auth/login", payload)
     .then(res => {
-      console.log(res.data)
       localStorage.setItem("token", res.data.user.token);
       dispatch(success(res.data.status));
       dispatch(logIn(true));
       setTimeout(() => {
+        dispatch({ type: actionTypes.SHOW, payload: true });
         history.push("/");
-      }, 3000);
+      }, 2000);
     })
     .catch(err => {
       dispatch(failure(err.message));
     });
 };
 export const SignUpAction = (payload, history) => dispatch => {
+  dispatch({ type: actionTypes.SHOW, payload: false });
   axios
     .post("https://api-bookr.herokuapp.com/api/auth/register", payload)
     .then(res => {
@@ -25,8 +27,9 @@ export const SignUpAction = (payload, history) => dispatch => {
       dispatch(success(res.data.status));
       dispatch(logIn(true));
       setTimeout(() => {
+        dispatch({ type: actionTypes.SHOW, payload: true });
         history.push("/");
-      }, 3000);
+      }, 2000);
     })
     .catch(err => {
       dispatch(failure(err.message));
@@ -35,27 +38,27 @@ export const SignUpAction = (payload, history) => dispatch => {
 export const getAllBooksAction = () => dispatch => {
   axios
     .get("https://api-bookr.herokuapp.com/api/books", {
-      'headers': {
-        'Authorization': localStorage.getItem("token")
+      headers: {
+        Authorization: localStorage.getItem("token")
       }
     })
     .then(res => {
-      dispatch({type: actionTypes.GETALLBOOKS, payload: res.data.books});
+      dispatch({ type: actionTypes.GETALLBOOKS, payload: res.data.books });
       dispatch(success(res.data.status));
     })
     .catch(err => {
       dispatch(failure(err.message));
     });
 };
-export const getOneBooksAction = (id) => dispatch => {
+export const getOneBooksAction = id => dispatch => {
   axios
-    .get("https://api-bookr.herokuapp.com/api/books/"+ id, {
-      'headers': {
-        'Authorization': localStorage.getItem("token")
+    .get("https://api-bookr.herokuapp.com/api/books/" + id, {
+      headers: {
+        Authorization: localStorage.getItem("token")
       }
     })
     .then(res => {
-      dispatch({type: actionTypes.GETONEBOOK, payload: res.data.book});
+      dispatch({ type: actionTypes.GETONEBOOK, payload: res.data.book });
       dispatch(success(res.data.status));
     })
     .catch(err => {
@@ -64,22 +67,22 @@ export const getOneBooksAction = (id) => dispatch => {
 };
 export const addReviewAction = (data, id) => dispatch => {
   axios
-    .post("https://api-bookr.herokuapp.com/api/reviews/"+ id, data, {
-      'headers': {
-        'Authorization': localStorage.getItem("token")
+    .post("https://api-bookr.herokuapp.com/api/reviews/" + id, data, {
+      headers: {
+        Authorization: localStorage.getItem("token")
       }
     })
     .then(res => {
-      console.log(res.data)
-      // dispatch({type: actionTypes.GETONEBOOK, payload: res.data.book});
-      // dispatch(success(res.data.status));
+      console.log(res.data);
+      dispatch({type: actionTypes.ADDREVIEW, payload: res.data.review});
+      dispatch(success(res.data.status));
     })
     .catch(err => {
       dispatch(failure(err.message));
     });
 };
 export const logOutAction = () => dispatch => {
-  localStorage.clear()
+  localStorage.clear();
   dispatch(logIn(false));
 };
 

@@ -34,17 +34,19 @@ class App extends Component {
         <Router>
           <header className="NavHeader">
             <img className="logo" src={logo} alt="" />
-            <NavLink to="/" exact>
-              Home
-            </NavLink>
-            <NavLink to="/login">Login</NavLink>
-            {this.props.login ? (
-              <Link to="/login" onClick={this.props.logOutAction}>
-                Logout
-              </Link>
-            ) : (
-              ""
-            )}
+            <div>
+              <NavLink to="/" exact>
+                Home
+              </NavLink>
+              <NavLink to="/login">Login</NavLink>
+              {this.props.login ? (
+                <Link to="/login" onClick={this.props.logOutAction}>
+                  Logout
+                </Link>
+              ) : (
+                ""
+              )}
+            </div>
           </header>
           <Switch>
             <PrivateRoute component={Home} path="/" exact />

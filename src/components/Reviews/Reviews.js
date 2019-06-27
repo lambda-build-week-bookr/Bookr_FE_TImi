@@ -16,7 +16,7 @@ const Reviews = props => {
         </div>
         <div>
           <p>{elem.username}</p> <Star star={elem.rating} />
-          <p>{elem.review}</p>
+          <p>{elem.review || elem.content }</p>
           <div />
         </div>
       </div>

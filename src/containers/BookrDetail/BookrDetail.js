@@ -24,7 +24,7 @@ class BookrDetail extends Component {
   addReviewHandler = e => {
     e.preventDefault(); 
     const data={
-      rating: this.state.rateValue,
+      rating: this.state.rateValue || 1,
       review: e.currentTarget[0].value
     }
     this.props.addReviewAction(data,this.props.match.params.id );
@@ -88,7 +88,7 @@ class BookrDetail extends Component {
             <form action="" onSubmit={this.addReviewHandler}>
               <h2>Add a Review</h2>
               <p>Give Overall Rating</p>
-              <div className="ratings">{rating}</div>
+              <div className="ratings"><span>Required</span>{rating} </div>
               <p>Write a Review</p>
               <textarea
                 name=""
@@ -102,7 +102,7 @@ class BookrDetail extends Component {
           <hr />
           <div className="community_reviews_container">
             <h2>COMMUNITY REVIEWS</h2>
-            <Reviews data={this.props.book.reviews || []} />
+            <Reviews data={this.props.review || []} />
           </div>
         </section>
         <Footer />
@@ -113,7 +113,8 @@ class BookrDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    book: state.book
+    book: state.book,
+    review: state.review
   };
 };
 export default connect(

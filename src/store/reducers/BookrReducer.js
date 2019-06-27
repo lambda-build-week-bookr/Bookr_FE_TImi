@@ -5,7 +5,9 @@ const initialState = {
   success: null,
   failure: null,
   books: [],
-  book: ""
+  book: "",
+  show: false,
+  review:[]
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -17,11 +19,13 @@ export default (state = initialState, { type, payload }) => {
     case actionTypes.FAILURE:
       return { ...state, failure: payload };
     case actionTypes.GETALLBOOKS:
-      return { ...state, books: payload };
+      return { ...state, books: payload};
     case actionTypes.GETONEBOOK:
-      return { ...state, book: payload };
+      return { ...state, book: payload, review: payload.reviews };
     case actionTypes.ADDREVIEW:
-      return { ...state, book: payload };
+      return { ...state, review: [...state.review, payload] };
+    case actionTypes.SHOW:
+      return { ...state, show: payload };
 
     default:
       return state;
