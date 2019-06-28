@@ -4,16 +4,20 @@ import "./ErrorMessage.scss";
 const errorMessage = props => {
   let message;
   if (props.success !== null) {
-    message = <p style={{ color: "#2ecc71" }}>{props.success}</p>;
+    message = (
+      <div hidden={props.show} className="Error_Success">
+        <p>{props.success}</p>{" "}
+      </div>
+    );
   } else {
-    message = <p style={{ color: "#e74c3c" }}>{props.failure}</p>;
+    message = (
+      <div hidden={props.show} className="Error_Failure">
+        <p>{props.failure}</p>{" "}
+      </div>
+    );
   }
 
-  return (
-    <div hidden={props.show} className="Error_Success">
-      {message}
-    </div>
-  );
+  return <>{message}</>;
 };
 
 const mapStateToProps = state => {

@@ -11,8 +11,10 @@ import { connect } from "react-redux";
 class BookrDetail extends Component {
   state = {
     rateValue: 0,
-    rated: false
+    rated: false,
+    hideNav: null
   };
+
   handleRating = event => {
     const rateValue = Number(event.target.id);
     this.setState({ rateValue, rated: true });
@@ -20,16 +22,29 @@ class BookrDetail extends Component {
   };
   componentDidMount() {
     this.props.getOneBooksAction(this.props.match.params.id);
+    window.addEventListener("resize", this.resize);
+    this.resize();
   }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.resize);
+  }
+  resize = () => {
+    if (window.innerWidth <= 500) {
+      this.setState({ hideNav: window.innerWidth });
+      console.log(window.innerWidth);
+    } else {
+      this.setState({ hideNav: null });
+    }
+  };
   addReviewHandler = e => {
-    e.preventDefault(); 
-    const data={
+    e.preventDefault();
+    const data = {
       rating: this.state.rateValue || 1,
       review: e.currentTarget[0].value
-    }
-    this.props.addReviewAction(data,this.props.match.params.id );
+    };
+    this.props.addReviewAction(data, this.props.match.params.id);
     e.currentTarget.reset();
-    this.setState({rated: false, rateValue: 0})
+    this.setState({ rated: false, rateValue: 0 });
   };
   render() {
     const { rateValue } = this.state;
@@ -59,9 +74,12 @@ class BookrDetail extends Component {
           </div>
           <div>
             <h1>{this.props.book.title}</h1>
-            <h4>by {this.props.book.authors ? this.props.book.authors[0].name : ''}</h4>
+            <h4>
+              by{" "}
+              {this.props.book.authors ? this.props.book.authors[0].name : ""}
+            </h4>
             <p>
-              {String(this.props.book.description).substring(0, 655) + "..."}
+              {String(this.props.book.description).substring(0, this.state.resize ? 625 : 150) + "..."}
             </p>
           </div>
           <div>
@@ -88,7 +106,10 @@ class BookrDetail extends Component {
             <form action="" onSubmit={this.addReviewHandler}>
               <h2>Add a Review</h2>
               <p>Give Overall Rating</p>
-              <div className="ratings"><span>Required</span>{rating} </div>
+              <div className="ratings">
+                <span>Required</span>
+                {rating}{" "}
+              </div>
               <p>Write a Review</p>
               <textarea
                 name=""

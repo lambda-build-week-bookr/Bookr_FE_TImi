@@ -1,6 +1,18 @@
-.Error_Success{
-position: absolute;
-left: 45%;
-top: 20%;
-color: red;
+.Error_Success {
+  position: absolute;
+  left: calc(100vw - 20vw);
+  top: 15%;
+  color: white;
+  border: .1rem solid green;
+  background: #0BC50C;
+  padding: 1rem 2rem;
 }
+.Error_Failure {
+    position: absolute;
+    left: calc(100vw - 20vw);
+    top: 15%;
+    color: white;
+    border: .1rem solid #E85642;
+    background: #E85642;
+    padding: 1rem 2rem;
+  }

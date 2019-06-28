@@ -67,7 +67,7 @@
     padding-top: 35rem;
     width: 80%;
     @media (max-width: 500px) {
-      padding-top: 60rem;
+      padding-top: 65rem;
       width: 100%;
      }
     .stars-outer {
@@ -120,6 +120,7 @@
       margin-top: 1rem;
       border-radius: 0.5rem;
       background: #ff8533;
+      outline: none;
       cursor: pointer;
       transition: transform 0.5s ease;
       &:hover {

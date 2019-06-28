@@ -38,13 +38,13 @@ class App extends Component {
               <NavLink to="/" exact>
                 Home
               </NavLink>
-              <NavLink to="/login">Login</NavLink>
+              
               {localStorage.getItem('token') ? (
                 <Link to="/logins" onClick={this.props.logOutAction}>
                   Logout
                 </Link>
               ) : (
-                <Link/>
+                <NavLink to="/login">Login</NavLink>
               )}
                 
             </div>
