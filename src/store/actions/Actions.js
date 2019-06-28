@@ -100,7 +100,7 @@ export const deleteReviewAction = (id) => dispatch => {
     })
     .then(res => {
       console.log(res.data);
-      // dispatch({ type: actionTypes.ADDREVIEW, payload: res.data.review });
+      dispatch({ type: actionTypes.DELETEREVIEW, payload: res.data.review });
       // dispatch(success(res.data.status));
     })
     .catch(err => {

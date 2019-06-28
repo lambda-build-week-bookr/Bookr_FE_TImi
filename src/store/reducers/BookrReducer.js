@@ -25,6 +25,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, book: payload, review: payload.reviews };
     case actionTypes.ADDREVIEW:
       return { ...state, review: [...state.review, payload] };
+    case actionTypes.DELETEREVIEW:
+      return { ...state, review: state.review.filter(elem=> elem.id !== payload.id) };
     case actionTypes.SHOW:
       return { ...state, show: payload };
     case actionTypes.USER:

@@ -5,7 +5,8 @@ import Footer from "../../components/Footer/Footer";
 import Reviews from "../../components/Reviews/Reviews";
 import {
   getOneBooksAction,
-  addReviewAction
+  addReviewAction,
+  deleteReviewAction
 } from "../../store/actions/Actions";
 import { connect } from "react-redux";
 class BookrDetail extends Component {
@@ -46,8 +47,11 @@ class BookrDetail extends Component {
     e.currentTarget.reset();
     this.setState({ rated: false, rateValue: 0 });
   };
-  deleteReviewHandler=()=>{
-
+  deleteReviewHandler=(id, user)=>{
+     console.log(id, user, this.props.user.username)
+     if(user === this.props.user.username){
+       this.props.deleteReviewAction(id)
+     }
   }
   render() {
     const { rateValue } = this.state;
@@ -145,10 +149,11 @@ class BookrDetail extends Component {
 const mapStateToProps = state => {
   return {
     book: state.book,
-    review: state.review
+    review: state.review,
+    user:state.user
   };
 };
 export default connect(
   mapStateToProps,
-  { getOneBooksAction, addReviewAction }
+  { getOneBooksAction, addReviewAction, deleteReviewAction }
 )(BookrDetail);
