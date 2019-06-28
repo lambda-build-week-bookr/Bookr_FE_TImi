@@ -6,14 +6,16 @@ import Reviews from "../../components/Reviews/Reviews";
 import {
   getOneBooksAction,
   addReviewAction,
-  deleteReviewAction
+  deleteReviewAction,
+  editReviewAction
 } from "../../store/actions/Actions";
 import { connect } from "react-redux";
 class BookrDetail extends Component {
   state = {
     rateValue: 0,
     rated: false,
-    hideNav: null
+    hideNav: null,
+    tempReview: ''
   };
 
   handleRating = event => {
@@ -47,9 +49,17 @@ class BookrDetail extends Component {
     e.currentTarget.reset();
     this.setState({ rated: false, rateValue: 0 });
   };
-  deleteReviewHandler=(id, user)=>{
-       this.props.deleteReviewAction(id)
-  }
+  deleteReviewHandler = (id, user) => {
+    this.props.deleteReviewAction(id);
+  };
+  editReviewHandler = (id, user) => {
+    this.props.editReviewAction(id);
+  };
+  retrieveReviewForEditHandler = (id) => {
+    const displayEdit = this.props.review.find(elem => elem.id === id);
+    this.setState({tempReview: displayEdit, rateValue: displayEdit.rating})
+  };
+
   render() {
     const { rateValue } = this.state;
     const rating = Array(5)
@@ -122,7 +132,7 @@ class BookrDetail extends Component {
                 name=""
                 id=""
                 placeholder="Write your detailed review here."
-              />{" "}
+              >{this.state.tempReview ? this.state.tempReview.review : ''}</textarea>
               <br />
               <button>Submit</button>
             </form>
@@ -135,6 +145,7 @@ class BookrDetail extends Component {
               delete={this.deleteReviewHandler}
               edit={this.editReviewHandler}
               user={this.props.user.username}
+              retrieveReview={this.retrieveReviewForEditHandler }
             />
           </div>
         </section>
@@ -148,10 +159,10 @@ const mapStateToProps = state => {
   return {
     book: state.book,
     review: state.review,
-    user:state.user
+    user: state.user
   };
 };
 export default connect(
   mapStateToProps,
-  { getOneBooksAction, addReviewAction, deleteReviewAction }
+  { getOneBooksAction, addReviewAction, deleteReviewAction, editReviewAction }
 )(BookrDetail);

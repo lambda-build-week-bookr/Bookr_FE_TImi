@@ -19,7 +19,7 @@ const Reviews = props => {
           <p>{elem.review || elem.content}</p>
           {props.user === elem.username ? (
             <>
-              <i className="fas fa-edit" />
+              <i className="fas fa-edit" onClick={() => props.retrieveReview(elem.id)}/>
               <i
                 className="fas fa-trash"
                 onClick={() => props.delete(elem.id)}

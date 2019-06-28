@@ -21,7 +21,7 @@ class App extends Component {
       <Route
         {...rest}
         render={props =>
-          localStorage.getItem("token") !== null ? (
+          this.props.login !== false ? (
             <Component {...props} />
           ) : (
             <Redirect to="/login" />
@@ -39,7 +39,7 @@ class App extends Component {
                 Home
               </NavLink>
               
-              {localStorage.getItem('token') ? (
+              {this.props.login ? (
                 <Link to="/logins" onClick={this.props.logOutAction}>
                   Logout
                 </Link>

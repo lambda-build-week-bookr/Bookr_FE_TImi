@@ -6,7 +6,7 @@ const initialState = {
   failure: null,
   books: [],
   book: "",
-  show: false,
+  show: true,
   review: [],
   user: ""
 };

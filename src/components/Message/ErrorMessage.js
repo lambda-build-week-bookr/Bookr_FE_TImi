@@ -9,7 +9,7 @@ const errorMessage = props => {
         <p>{props.success}</p>{" "}
       </div>
     );
-  } else {
+  } else if (props.failure !== null) {
     message = (
       <div hidden={props.show} className="Error_Failure">
         <p>{props.failure}</p>{" "}

@@ -82,6 +82,22 @@ export const addReviewAction = (data, id) => dispatch => {
       dispatch(failure(err.message));
     });
 };
+export const editReviewAction = (data, id) => dispatch => {
+  axios
+    .put("https://api-bookr.herokuapp.com/api/reviews/" + id, data, {
+      headers: {
+        Authorization: localStorage.getItem("token")
+      }
+    })
+    .then(res => {
+      console.log(res.data)
+      // dispatch({ type: actionTypes.EDITREVIEW, payload: res.data.review });
+      // dispatch(success(res.data.status));
+    })
+    .catch(err => {
+      dispatch(failure(err.message));
+    });
+};
 export const logOutAction = () => dispatch => {
   dispatch({ type: actionTypes.SHOW, payload: false });
   localStorage.clear();
