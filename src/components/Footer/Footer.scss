@@ -1,13 +1,22 @@
-.Footer{
-    display: flex;
-    justify-content: space-around;
-    margin: 1rem 0;
-    background: #FFC886;
-    &>div:nth-of-type(1){
-        i{
-            padding: 1rem;
-            font-size: 1.6rem;
-            color: rgba(0, 0, 0, 0.541);
-        }
+.Footer {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0;
+  background: #ffc886;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    text-align: center;
+  }
+  & > div:nth-of-type(1) {
+    i {
+      padding: 1rem;
+      font-size: 1.6rem;
+      color: rgba(0, 0, 0, 0.541);
+      cursor: pointer;
+      &:hover{
+          color: rgb(29, 29, 177);
+      }
     }
+    
+  }
 }

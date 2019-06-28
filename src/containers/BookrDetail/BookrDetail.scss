@@ -15,6 +15,7 @@
     top: 20rem;
     left: 5rem;
     right: 5rem;
+    
     & > div:nth-of-type(1) {
       width: 30%;
       img {
@@ -41,10 +42,34 @@
         }
       }
     }
+    @media (max-width: 500px) {
+      flex-direction: column;
+      left: 0rem;
+      right: 0rem;
+      & > div:nth-of-type(1),
+      & > div:nth-of-type(2),
+      & > div:nth-of-type(3)
+       {
+        width: 100%;
+        text-align: center;
+      }
+      & > div:nth-of-type(3)
+       {
+        margin-top: 1rem;
+      }
+      & > div:nth-of-type(1)
+      {
+       margin-bottom: 1rem;
+     }
+     }
   }
   .reviews {
     padding-top: 35rem;
     width: 80%;
+    @media (max-width: 500px) {
+      padding-top: 60rem;
+      width: 100%;
+     }
     .stars-outer {
       font-size: 2rem;
     }
@@ -74,14 +99,20 @@
     }
   }
   .review_Form {
+    @media (max-width: 500px) {
+     padding: 1rem;
+    }
     textarea {
       resize: none;
-      width: 61.2rem;
+      width: calc(100% - 20%);
       height: 15rem;
       outline: none;
       border-radius: 1rem;
       padding: 1rem;
       font-size: 1.6rem;
+      @media (max-width: 500px) {
+        width: 100%;
+      }
     }
     button {
       font-size: 1.6rem;
@@ -100,5 +131,9 @@
     width: 70%;
     padding: 0.5%;
     margin: 0 auto;
+    @media (max-width: 500px) {
+      width: 100%;
+      padding: 1rem;
+     }
   }
 }

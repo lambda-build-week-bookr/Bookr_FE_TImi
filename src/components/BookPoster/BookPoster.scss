@@ -11,6 +11,9 @@
   margin-top: 2rem;
   flex-wrap: wrap;
   cursor: pointer;
+  @media (max-width: 500px) {
+    justify-content: center;
+  }
   & > div {
     width: 220px;
     height: 300px;

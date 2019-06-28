@@ -7,9 +7,10 @@ const initialState = {
   books: [],
   book: "",
   show: false,
-  review:[]
+  review: [],
+  user: ""
 };
-
+// displaying of current user name and pic
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case actionTypes.LOGIN:
@@ -19,7 +20,7 @@ export default (state = initialState, { type, payload }) => {
     case actionTypes.FAILURE:
       return { ...state, failure: payload };
     case actionTypes.GETALLBOOKS:
-      return { ...state, books: payload};
+      return { ...state, books: payload };
     case actionTypes.GETONEBOOK:
       return { ...state, book: payload, review: payload.reviews };
     case actionTypes.ADDREVIEW:
