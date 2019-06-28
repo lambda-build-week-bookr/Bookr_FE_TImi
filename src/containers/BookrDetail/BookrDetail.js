@@ -48,10 +48,7 @@ class BookrDetail extends Component {
     this.setState({ rated: false, rateValue: 0 });
   };
   deleteReviewHandler=(id, user)=>{
-     console.log(id, user, this.props.user.username)
-     if(user === this.props.user.username){
        this.props.deleteReviewAction(id)
-     }
   }
   render() {
     const { rateValue } = this.state;
@@ -137,6 +134,7 @@ class BookrDetail extends Component {
               data={this.props.review || []}
               delete={this.deleteReviewHandler}
               edit={this.editReviewHandler}
+              user={this.props.user.username}
             />
           </div>
         </section>

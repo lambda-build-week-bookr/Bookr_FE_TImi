@@ -16,9 +16,18 @@ const Reviews = props => {
         </div>
         <div>
           <p>{elem.username}</p> <Star star={elem.rating} />
-          <p>{elem.review || elem.content }</p>
-          <i className="fas fa-edit" ></i>
-          <i className="fas fa-trash" onClick={()=>props.delete(elem.id, elem.username)}></i>
+          <p>{elem.review || elem.content}</p>
+          {props.user === elem.username ? (
+            <>
+              <i className="fas fa-edit" />
+              <i
+                className="fas fa-trash"
+                onClick={() => props.delete(elem.id)}
+              />
+            </>
+          ) : (
+            ""
+          )}
           <div />
         </div>
       </div>
