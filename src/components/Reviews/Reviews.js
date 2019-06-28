@@ -17,6 +17,8 @@ const Reviews = props => {
         <div>
           <p>{elem.username}</p> <Star star={elem.rating} />
           <p>{elem.review || elem.content }</p>
+          <i className="fas fa-edit" ></i>
+          <i className="fas fa-trash" onClick={props.delete}></i>
           <div />
         </div>
       </div>

@@ -46,6 +46,9 @@ class BookrDetail extends Component {
     e.currentTarget.reset();
     this.setState({ rated: false, rateValue: 0 });
   };
+  deleteReviewHandler=()=>{
+
+  }
   render() {
     const { rateValue } = this.state;
     const rating = Array(5)
@@ -79,7 +82,10 @@ class BookrDetail extends Component {
               {this.props.book.authors ? this.props.book.authors[0].name : ""}
             </h4>
             <p>
-              {String(this.props.book.description).substring(0, this.state.resize ? 625 : 150) + "..."}
+              {String(this.props.book.description).substring(
+                0,
+                this.state.resize ? 625 : 150
+              ) + "..."}
             </p>
           </div>
           <div>
@@ -123,7 +129,11 @@ class BookrDetail extends Component {
           <hr />
           <div className="community_reviews_container">
             <h2>COMMUNITY REVIEWS</h2>
-            <Reviews data={this.props.review || []} />
+            <Reviews
+              data={this.props.review || []}
+              delete={this.deleteReviewHandler}
+              edit={this.editReviewHandler}
+            />
           </div>
         </section>
         <Footer />

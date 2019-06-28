@@ -27,6 +27,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, review: [...state.review, payload] };
     case actionTypes.SHOW:
       return { ...state, show: payload };
+    case actionTypes.USER:
+      return { ...state, user: payload };
 
     default:
       return state;

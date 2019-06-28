@@ -9,4 +9,5 @@ export const DELETEREVIEW = 'DELETEREVIEW'
 export const FAILURE = "FAILURE";
 export const SUCCESS = 'SUCCESS'
 export const SHOW = 'SHOW'
+export const USER = 'USER'
 

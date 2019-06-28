@@ -1,6 +1,5 @@
 .list_of_community_reviews {
   display: flex;
-  // justify-content: space-between;
   padding: 2rem;
   & > div:nth-of-type(2) {
     max-width: 55rem;
@@ -8,6 +7,15 @@
 
     p:nth-of-type(1) {
       display: inline;
+    }
+    i{
+      color: #27ae60;  
+      font-size: 1.6rem;
+      padding: 0 1rem;
+      cursor: pointer;
+      &:nth-of-type(2){
+        color: #2c3e50;
+      }
     }
   }
 }

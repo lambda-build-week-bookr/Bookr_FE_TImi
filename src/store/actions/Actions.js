@@ -6,7 +6,9 @@ export const LoginAction = (payload, history) => dispatch => {
   axios
     .post("https://api-bookr.herokuapp.com/api/auth/login", payload)
     .then(res => {
+      console.log(res.data);
       localStorage.setItem("token", res.data.user.token);
+      dispatch({ type: actionTypes.USER, payload: res.data.user });
       dispatch(success(res.data.status));
       dispatch(logIn(true));
       setTimeout(() => {
@@ -73,7 +75,7 @@ export const addReviewAction = (data, id) => dispatch => {
       }
     })
     .then(res => {
-      dispatch({type: actionTypes.ADDREVIEW, payload: res.data.review});
+      dispatch({ type: actionTypes.ADDREVIEW, payload: res.data.review });
       dispatch(success(res.data.status));
     })
     .catch(err => {
@@ -81,8 +83,29 @@ export const addReviewAction = (data, id) => dispatch => {
     });
 };
 export const logOutAction = () => dispatch => {
+  dispatch({ type: actionTypes.SHOW, payload: false });
   localStorage.clear();
+  dispatch({ type: actionTypes.USER, payload: null });
   dispatch(logIn(false));
+  setTimeout(() => {
+    dispatch({ type: actionTypes.SHOW, payload: true });
+  }, 2000);
+};
+export const deleteReviewAction = (id) => dispatch => {
+  axios
+    .delete("https://api-bookr.herokuapp.com/api/reviews/" + id, {
+      headers: {
+        Authorization: localStorage.getItem("token")
+      }
+    })
+    .then(res => {
+      console.log(res.data);
+      // dispatch({ type: actionTypes.ADDREVIEW, payload: res.data.review });
+      // dispatch(success(res.data.status));
+    })
+    .catch(err => {
+      dispatch(failure(err.message));
+    });
 };
 
 export const logIn = payload => {
