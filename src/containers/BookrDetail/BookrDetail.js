@@ -15,7 +15,8 @@ class BookrDetail extends Component {
     rateValue: 0,
     rated: false,
     hideNav: null,
-    tempReview: ''
+    tempReview: '',
+    edit: false
   };
 
   handleRating = event => {
@@ -47,18 +48,37 @@ class BookrDetail extends Component {
     };
     this.props.addReviewAction(data, this.props.match.params.id);
     e.currentTarget.reset();
-    this.setState({ rated: false, rateValue: 0 });
+    this.setState({ rated: false, rateValue: 0, tempReview: '' });
   };
-  deleteReviewHandler = (id, user) => {
+  deleteReviewHandler = id => {
     this.props.deleteReviewAction(id);
   };
-  editReviewHandler = (id, user) => {
-    this.props.editReviewAction(id);
+  editReviewHandler = e => {
+    e.preventDefault();
+    console.log('object')
+    const data = {
+      rating: this.state.rateValue || 1,
+      review: e.currentTarget[0].value
+    };
+    this.props.editReviewAction(data, this.props.match.params.id);
+    this.setState({
+      edit: false,
+      tempReview: '',
+      rateValue: 0
+    });
+    // e.currentTarget.reset()
   };
-  retrieveReviewForEditHandler = (id) => {
+  retrieveReviewForEditHandler = id => {
     const displayEdit = this.props.review.find(elem => elem.id === id);
-    this.setState({tempReview: displayEdit, rateValue: displayEdit.rating})
+    this.setState({
+      tempReview: displayEdit.review,
+      rateValue: displayEdit.rating,
+      edit: true
+    });
   };
+  editFormOnChange=(e)=>{
+    this.setState({tempReview: e.currentTarget.value})
+  }
 
   render() {
     const { rateValue } = this.state;
@@ -120,7 +140,12 @@ class BookrDetail extends Component {
             <hr />
           </div>
           <div className="review_Form">
-            <form action="" onSubmit={this.addReviewHandler}>
+            <form
+              action=""
+              onSubmit={
+                this.state.edit ? this.editReviewHandler : this.addReviewHandler
+              }
+            >
               <h2>Add a Review</h2>
               <p>Give Overall Rating</p>
               <div className="ratings">
@@ -132,7 +157,9 @@ class BookrDetail extends Component {
                 name=""
                 id=""
                 placeholder="Write your detailed review here."
-              >{this.state.tempReview ? this.state.tempReview.review : ''}</textarea>
+                value={this.state.tempReview }
+                onChange={this.editFormOnChange}
+              />
               <br />
               <button>Submit</button>
             </form>
@@ -143,9 +170,8 @@ class BookrDetail extends Component {
             <Reviews
               data={this.props.review || []}
               delete={this.deleteReviewHandler}
-              edit={this.editReviewHandler}
               user={this.props.user.username}
-              retrieveReview={this.retrieveReviewForEditHandler }
+              retrieveReview={this.retrieveReviewForEditHandler}
             />
           </div>
         </section>
