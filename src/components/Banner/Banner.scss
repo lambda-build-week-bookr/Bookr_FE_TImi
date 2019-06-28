@@ -1,10 +1,35 @@
-.Banner_Image{
+.Banner_Image {
+  width: 100%;
+  height: 400px;
+  margin: 2rem 0;
+  position: relative;
+  overflow: hidden;
+  h1{
+      position: absolute;
+      top: 9rem;
+      right: 9rem;
+      color: white;
+      z-index: 2;
+      word-spacing: 1rem;
+      line-height: 4rem
+  }
+  img {
     width: 100%;
     height: 400px;
-    margin: 2rem 0;
-    img{
-        width: 100%;
-        height: 400px;
-        object-fit: cover;
+    object-fit: cover;
+  }
+  div:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -120px;
+    bottom: 0;
+    background: linear-gradient(to bottom, #1e5799 35%, #7db9e8 100%);
+    opacity: 0.6;
+    width: 500px;
+    transform: skew(30deg);
+    @media (max-width: 500px){
+        display: none;
     }
+  }
 }
